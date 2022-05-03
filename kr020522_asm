@@ -9,7 +9,7 @@ _start:
     call _scan_
     mov rcx, N
     xor rdx, rdx
-    xor rax, rax
+    
     
     L1:
     
@@ -58,7 +58,6 @@ _start:
     L2:
     inc rcx
     L4:
-    xor rax, rax
     
     loop L1
 
