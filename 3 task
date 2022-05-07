@@ -1,0 +1,56 @@
+section .bss
+text resb 100
+N equ 100
+
+section .text
+global _start
+_start:
+
+    call _scan_
+
+    mov rcx, N
+    xor rdx, rdx
+    L1:
+    mov dl, 65
+    cmp [text + (rcx - 1)], dl
+    jb L2
+    mov dl, 90
+    cmp [text + (rcx - 1)], dl
+    ja L3
+    mov rax, [text + (rcx - 1)]
+    add rax, 32
+    mov [text + (rcx - 1)], rax
+    jmp L2
+    L3:
+    mov dl, 97
+    cmp [text + (rcx - 1)], dl
+    jb L2
+    mov dl, 122
+    cmp [text + (rcx - 1)], dl
+    ja L2
+    mov rax, [text + (rcx - 1)]
+    sub rax, 32
+    mov [text + (rcx - 1)], rax
+    L2:
+    loop L1
+
+    call _print_
+
+    mov rax, 60
+    mov rdi, 0
+    syscall
+
+_scan_:
+    mov rax, 0
+    mov rdi, 0
+    mov rsi, text
+    mov rdx, N
+    syscall
+    ret
+
+_print_:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, text
+    mov rdx, N
+    syscall
