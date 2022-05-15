@@ -2,6 +2,7 @@
 
 int main(int n, char **argv)
 {
+    //char * filename1 = /*"a.out";*/argv[1];
     char * filename2 = "b.out";
     char cc[1];
     FILE *f1, *f2;
@@ -19,7 +20,7 @@ int main(int n, char **argv)
     char ssd;
     int g = 0;
     ssd = getc(f1);
-     while((ssd != EOF  h < 16000)){   
+     while((ssd != EOF || h < 16000)){   
         h+=1;
         if(ssd == 'H'){
             ssd = getc(f1);
@@ -47,6 +48,7 @@ int main(int n, char **argv)
     fclose(f1);
     fclose(f2);
 
+    //for(int i = 0; i < 10000000; i++);
     if((f1= fopen(argv[1], "w"))==NULL){
         perror("Error occured while opening file");
         return 1;
@@ -56,11 +58,9 @@ int main(int n, char **argv)
         perror("Error occured while opening file");
         return 1;
     }
-    
     h = 0;
     ssd = getc(f2);
-    
-    while((ssd != EOF  h < 16000)){
+    while((ssd != EOF || h < 16000)){
         h++;
         fprintf(f1,"%c",ssd); 
         ssd = getc(f2);
